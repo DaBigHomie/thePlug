@@ -7,16 +7,11 @@ description: >
   Emits a verdict: SYNCED | NEEDS_SYNC | HOLD.
 ---
 
-# repo-sync-guard
+# Repo Sync Guard — Pre-Flight Hygiene Audit
 
-Read-only pre-flight that answers one question: **would landing work here regress code or lose work?**
+> Scope: any git repo · Runtime: `npx tsx` · Credit: DaBigHomie / thePlug
 
-## When to run
-
-Before any commit / push / merge / branch land, before cleaning up worktrees or branches, and
-when reconciling work across machines.
-
-## How to run
+## 🚀 Quick Run
 
 ```bash
 # audit one repo (default: current dir)
@@ -32,9 +27,11 @@ npx tsx repo-sync-guard.mts --root ~/projects
 npx tsx repo-sync-guard.mts <repoDir> --json
 ```
 
-## What it checks
+---
 
-| Check | What it catches |
+## What It Checks
+
+| Check | What It Catches |
 |-------|----------------|
 | Dirty tree / stashes | Staged, unstaged, untracked counts; pending stashes |
 | Branches vs remote | Ahead (unpushed), behind, diverged, or gone upstream |
@@ -42,13 +39,30 @@ npx tsx repo-sync-guard.mts <repoDir> --json
 | Open PRs / issues | Via `gh` CLI (read-only) when present and authed |
 | Migration safety | Local migration files (Supabase/Prisma) vs applied state |
 
+---
+
 ## Verdict
 
-- **SYNCED** — Clean tree, no unpushed/behind/gone, no stash. Safe to proceed.
-- **NEEDS_SYNC** — Unpushed/behind/diverged work, dirty tree, or stashes. Push/pull/commit first.
-- **HOLD** — Dirty tree AND unpushed commits (work-loss risk). Stop; resolve first.
+| Verdict | Meaning | Action |
+|---------|---------|--------|
+| `SYNCED` | Clean tree, no unpushed/behind/gone, no stash | ✅ Safe to proceed |
+| `NEEDS_SYNC` | Unpushed/behind/diverged work, dirty tree, or stashes | ⚠️ Push/pull/commit first |
+| `HOLD` | Dirty tree AND unpushed commits (work-loss risk) | ⛔ Stop; resolve first |
+
+---
 
 ## Remediation
 
-`--remediate` performs ONLY safe, reversible cleanup (`git worktree prune`) and
-prints recommended commands for everything else. It never auto-commits or auto-pushes.
+| Flag | Behavior |
+|------|----------|
+| `--remediate` | Safe, reversible cleanup only (`git worktree prune`) |
+| No flag | Read-only report with recommended commands |
+
+⛔ Never auto-commits or auto-pushes
+
+---
+
+## Cross-references
+
+- [repo-sync-guard runbook](../runbooks/repo-sync-guard.md)
+- [branch-hygiene](branch-hygiene.md) — branch classification

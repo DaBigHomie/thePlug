@@ -6,36 +6,52 @@ description: >
   design alignment, or evaluating execution plans.
 ---
 
-# Forensic Auditing
+# Forensic Auditing — Deterministic Codebase Alignment
 
-Deterministic rules for auditing codebase alignment. Never rely on heuristics, names, or assumptions.
+> Scope: any codebase audit · Runtime: agent workflow · Credit: DaBigHomie / thePlug
 
-## 1. Evaluate Functional Payload, Not Filenames
+---
 
-Do not forecast blast radius based on file names or document titles.
-- **Rule:** Evaluate the actual functional payload of a document or script.
-- **Example:** A document that passes a UI keyword check may contain a 24-point backend infrastructure upgrade. Read the instructions end-to-end.
+## Audit Rules
 
-## 2. Diff Pending Actions Against Git HEAD
+| # | Rule | Anti-Pattern | Correct Approach |
+|---|------|-------------|------------------|
+| 1 | Evaluate functional payload | Forecasting blast radius from filenames | Read instructions end-to-end |
+| 2 | Diff against git HEAD | Executing old patches without checking live state | `git diff HEAD` before authorizing |
+| 3 | Trace component abstractions | Literal string matching for compliance | Strip comments, analyze component imports |
+| 4 | Deterministic disk checks | Trusting manifest paths without verification | `existsSync()` + fuzzy-match fallback |
+| 5 | Enforce pipeline DAGs | Running interdependent operations concurrently | Quarantine, sequence, inject individually |
 
-Codebases are living systems. Old patches or outdated prompts guarantee conflicts.
-- **Rule:** Before authorizing execution, dynamically check the live state of the target.
-- **Example:** Check `package.json` for existing dependency upgrades. Scan migrations to see if a schema change is already applied.
+---
 
-## 3. Trace Component Abstractions
+## Decision Matrix
 
-Modern codebases use dependency abstraction. A file may not use a raw token directly.
-- **Rule:** Forensic auditing requires stripping code comments and analyzing component-level abstractions. Do not rely on literal string matching.
-- **Example:** A file importing `<Header>` is compliant even if the explicit import of a design token is absent.
+| Condition | Action |
+|-----------|--------|
+| File passes keyword check but contains unrelated payload | ⛔ Reject — evaluate actual content |
+| `package.json` already has the upgrade | ⛔ Skip — already applied |
+| Component imports `<Header>` but no raw token import | ✅ Compliant via abstraction |
+| Manifest path does not exist on disk | ⚠️ Fuzzy-match across directory tree |
+| Multiple pending prompts affect same architecture | ⛔ `HOLD` until DAG sequence established |
 
-## 4. Execute Deterministic Disk Checks
+---
 
-A design manifest is a statement of intent, not reality.
-- **Rule:** Use deterministic file-system validation.
-- **Example:** Verify the existence of target files. If a path from a manifest fails, run a fuzzy-match across the directory tree.
+## Validation Commands
 
-## 5. Enforce Pipeline DAGs
+```bash
+# Check if target files exist
+find ./src -name "*.ts" -maxdepth 4 | head -20
 
-You cannot run multiple interdependent operations concurrently.
-- **Rule:** Operations must be quarantined, sequenced, and injected individually.
-- **Example:** If multiple pending prompts affect the same architecture, flag them as `HOLD` until a DAG sequence is established.
+# Diff pending changes against HEAD
+git diff HEAD --stat
+
+# Verify no outdated patches
+git log --oneline -5
+```
+
+---
+
+## Cross-references
+
+- [forecast-scrutiny](forecast-scrutiny.md) — pre-action risk assessment
+- [repo-sync-guard](repo-sync-guard.md) — pre-flight hygiene

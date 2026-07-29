@@ -5,13 +5,11 @@ description: >
   prunable entries, and agent-created worktrees (Claude, Cursor, Gemini).
 ---
 
-# worktree-lint
+# Worktree Lint — Agent Worktree Scanner
 
-Flags linked worktrees vs real clones under your workspace root.
-Especially useful when AI coding agents (Claude Code, Cursor, Antigravity)
-create worktrees that accumulate over time.
+> Scope: any workspace root · Runtime: `npx tsx` · Credit: DaBigHomie / thePlug
 
-## Usage
+## 🚀 Quick Run
 
 ```bash
 # scan current directory
@@ -24,20 +22,30 @@ npx tsx worktree-lint.mts --root=~/projects
 npx tsx worktree-lint.mts --json
 ```
 
-## What it reports
+---
 
-For each repo under the root:
-- Total worktree count
-- Linked (non-main) worktrees and their branch assignments
-- Prunable worktrees (the directory was deleted but git still tracks it)
-- Agent-created worktrees (`.claude/worktrees`, `.cursor/worktrees`, `.gemini/worktrees`)
+## What It Reports
 
-## Why this matters
+| Check | Description |
+|-------|-------------|
+| Total worktree count | Per-repo worktree inventory |
+| Linked worktrees | Non-main worktrees and their branch assignments |
+| Prunable entries | Directory deleted but git still tracks the worktree |
+| Agent worktrees | Created by `.claude/`, `.cursor/`, `.gemini/` |
 
-AI coding agents frequently create worktrees for parallel tasks. Over time these
-accumulate and can:
-- Bloat disk usage
-- Cause branch conflicts (two worktrees on the same branch)
-- Leave dangling admin entries after the worktree directory is removed
+---
 
-Run this periodically to keep your workspace clean.
+## Why This Matters
+
+| Problem | Impact |
+|---------|--------|
+| Agent-created worktrees accumulate | Disk bloat |
+| Two worktrees on same branch | Branch conflicts |
+| Deleted directory, admin entry remains | Dangling references |
+
+---
+
+## Cross-references
+
+- [worktree-lint runbook](../runbooks/worktree-lint.md)
+- [repo-sync-guard](repo-sync-guard.md) — pre-flight hygiene

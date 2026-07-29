@@ -6,9 +6,9 @@ description: >
   Squash-merge aware via opt-in GitHub PR lookup.
 ---
 
-# branch-hygiene
+# Branch Hygiene — 9-Class Branch Classifier
 
-Classifies every local branch so you know what's safe to delete and what needs attention.
+> Scope: any git repo · Runtime: `npx tsx` · Credit: DaBigHomie / thePlug
 
 ## The 9 classes
 
