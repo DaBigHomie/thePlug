@@ -57,6 +57,13 @@ Workflow definitions for AI agents. Drop these into your agent config.
 |-------|-------------|
 | [`prompt-upscaler`](skills/prompt-upscaler.md) | 10-lever prompt specification densifier with emission tiers |
 
+#### Expo / iOS Development
+
+| Skill | What It Does |
+|-------|-------------|
+| [`expo-ios-dev-stack`](skills/expo-ios-dev-stack.md) | Full-stack boot, Metro fallback, and Xcode native rebuild |
+| [`expo-ios-testing`](skills/expo-ios-testing.md) | Maestro automation for iOS clickthrough and validation |
+
 ---
 
 ### Runbooks
@@ -95,6 +102,13 @@ Step-by-step operational guides.
 | [`mine-transcript`](runbooks/mine-transcript.md) | Transcript mining |
 | [`collect-agent-context`](runbooks/collect-agent-context.md) | Agent context collection |
 | [`prompt-upscaler`](runbooks/prompt-upscaler.md) | Prompt specification |
+
+#### Expo / iOS Development
+
+| Runbook | For |
+|---------|-----|
+| [`expo-ios-dev-stack`](runbooks/expo-ios-dev-stack.md) | iOS dev stack boot + rebuild |
+| [`expo-ios-testing`](runbooks/expo-ios-testing.md) | Maestro test automation |
 
 ---
 
