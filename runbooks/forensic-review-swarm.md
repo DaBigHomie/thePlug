@@ -1,3 +1,8 @@
+---
+name: forensic-review-swarm-runbook
+description: "Runbook: Forensic Review Swarm — Runbook"
+---
+
 # Forensic Review Swarm — Runbook
 
 > Credit: DaBigHomie / thePlug

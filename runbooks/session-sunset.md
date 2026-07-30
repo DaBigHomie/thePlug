@@ -1,3 +1,8 @@
+---
+name: session-sunset-runbook
+description: "Runbook: Session Sunset — Runbook"
+---
+
 # Session Sunset — Runbook
 
 > Credit: DaBigHomie / thePlug

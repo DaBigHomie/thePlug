@@ -1,3 +1,8 @@
+---
+name: repo-sync-guard-runbook
+description: "Runbook: Runbook: repo-sync-guard"
+---
+
 # Runbook: repo-sync-guard
 
 > Pre-flight audit before committing, pushing, or merging.

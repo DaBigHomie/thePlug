@@ -1,3 +1,8 @@
+---
+name: cold-verification-runbook
+description: "Runbook: Cold Verification — Runbook"
+---
+
 # Cold Verification — Runbook
 
 > Credit: DaBigHomie / thePlug

@@ -1,3 +1,8 @@
+---
+name: forensic-auditing-runbook
+description: "Runbook: Runbook: forensic-auditing"
+---
+
 # Runbook: forensic-auditing
 
 > Deep-dive auditing to prevent drift and regressions.

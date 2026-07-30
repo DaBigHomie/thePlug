@@ -1,3 +1,8 @@
+---
+name: mine-transcript-runbook
+description: "Runbook: Runbook: mine-transcript"
+---
+
 # Runbook: mine-transcript
 
 > Extract an auditable record from an AI coding session.

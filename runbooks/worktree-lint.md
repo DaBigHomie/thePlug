@@ -1,3 +1,8 @@
+---
+name: worktree-lint-runbook
+description: "Runbook: Runbook: worktree-lint"
+---
+
 # Runbook: worktree-lint
 
 > Find and clean up worktrees across your workspace.
