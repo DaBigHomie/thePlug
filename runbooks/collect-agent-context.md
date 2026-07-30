@@ -1,3 +1,8 @@
+---
+name: collect-agent-context-runbook
+description: "Runbook: Runbook: collect-agent-context"
+---
+
 # Runbook: collect-agent-context
 
 > Daily scan of ALL AI coding tools for today's artifacts.

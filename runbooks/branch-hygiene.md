@@ -1,3 +1,8 @@
+---
+name: branch-hygiene-runbook
+description: "Runbook: Runbook: branch-hygiene"
+---
+
 # Runbook: branch-hygiene
 
 > Classify and clean up local branches with a 9-class system.

@@ -1,3 +1,8 @@
+---
+name: prompt-upscaler-runbook
+description: "Runbook: Prompt Upscaler — Runbook"
+---
+
 # Prompt Upscaler — Runbook
 
 > Credit: DaBigHomie / thePlug

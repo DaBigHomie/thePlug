@@ -51,7 +51,7 @@ Reversibility: Read-only except for artifact writes under the session output dir
 
 ### Phase 0 — Preflight
 Parameters (resolve before starting; halt if unresolved):
-  REPO_ALIAS      = <alias as registered in CORTEX>
+  REPO_ALIAS      = <alias for the active repo>
   SESSION_ID      = <...>
   OUT             = <repo-relative session output dir>
   BOARD_TOOL      = claude-board | cursor-board | gemini-board   [D7]
@@ -75,7 +75,7 @@ Gate: every MISSING row has a chosen action. Do not author skills mid-routine. [
 ### Phase 1 — Index coverage check          [D2 — hoisted from mid-paragraph]
 Do: Determine whether the session index covers work performed before indexing began.
     Coverage check: every commit on the session branch, every merged PR in the session
-    window, and every CORTEX row for SESSION_ID appears in the index.
+    window, and every tracked task row for SESSION_ID appears in the index.
 Gate: coverage check passes.
 On gap: run /ide-store-forensic-index, then /session-chapter-index, then re-check.
         Max 2 rebuild attempts; on third failure halt and report the uncovered set.
@@ -146,10 +146,10 @@ Gate: every link resolves. Descriptions are not links — a finding count is not
       a path to the findings file is.
 Emits: $OUT/handoff.md (final)
 
-### Phase 8 — CORTEX task flip                            [D6 — observable trigger]
+### Phase 8 — Task state flip                             [D6 — observable trigger]
 Trigger: all Phase 4 workers have terminated (success or recorded failure) AND
          Phase 5 has written verified.json. Not "when the subagents stop."
-Do: Verify every CORTEX task for SESSION_ID carries REPO_ALIAS. Backfill any missing.
+Do: Verify every tracked task for SESSION_ID carries REPO_ALIAS. Backfill any missing.
     Then flip task states.
 Gate: zero tasks for SESSION_ID lacking a repo alias.
 On failure: halt. Do not proceed to teardown with unaliased tasks.
@@ -162,7 +162,7 @@ Emits: list of updated docs, appended to handoff.md.
 
 ### Phase 10 — Continuity verification
 Do: Confirm the session state is resumable via /prime-orchestration-continue —
-    the handoff, contract, index, and CORTEX task state are all discoverable from
+    the handoff, contract, index, and task state are all discoverable from
     SESSION_ID alone.
 Gate: continuation check passes. This gate protects teardown.
 
@@ -209,9 +209,9 @@ unmerged work costs the session.
 ## Assumptions
 
 - [ASSUMPTION] The six named `EXISTS` skills perform what their names imply; their internal steps were not modified, only their sequencing and gating.
-- [ASSUMPTION] CORTEX task "flip" is a state transition on task rows keyed by session, and "repo alias" is a field on those rows.
+- [ASSUMPTION] Task "flip" is a state transition on task rows keyed by session, and "repo alias" is a field on those rows.
 - [ASSUMPTION] `$OUT` is a per-session directory; substitute the actual convention.
-- [ASSUMPTION] Session-branch commits, merged PRs in the window, and CORTEX rows are the right coverage denominator for Phase 1.
+- [ASSUMPTION] Session-branch commits, merged PRs in the window, and tracked task rows are the right coverage denominator for Phase 1.
 
 ## Open questions
 

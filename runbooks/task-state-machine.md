@@ -1,3 +1,8 @@
+---
+name: task-state-machine-runbook
+description: "Runbook: Task State Machine — Runbook"
+---
+
 # Task State Machine — Runbook
 
 > Credit: DaBigHomie / thePlug
