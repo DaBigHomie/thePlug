@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+
+# Gate config (contains internal/private patterns — never commit)
+.gate-patterns.txt

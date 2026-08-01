@@ -59,7 +59,7 @@ done
 - ⛔ NEVER copy internal files verbatim — always remix first
 - ⛔ NEVER include: CORTEX DB refs, Supabase project IDs, agent IDs,
   cluster/swarm IDs, internal session IDs, MALFIG gate references
-- ⛔ NEVER include: hardcoded `/Users/dame/...` or `$MGMT_ROOT` paths
+- ⛔ NEVER include: hardcoded `/Users/<name>/...` or absolute home-dir paths
 - ⛔ NEVER include: SQL with `cortex_tasks`, `cortex_knowledge`, `cortex_sessions`
 - ✅ Replace internal concepts with generic equivalents
 - ✅ Keep the PATTERNS and WORKFLOWS — these are the value
